@@ -2,9 +2,10 @@ from os import getenv
 from dotenv import load_dotenv
 from core.exceptions import InvalidEnvironmentFile
 
+dotenv_loaded = load_dotenv(".env.dev")
+
 class Config:
     debug = True
-    env_file = ".env.dev"
         
     class Database:
         host = getenv("DB_HOST")
@@ -16,7 +17,7 @@ class Config:
     class SQLAlchemy:
         pool_size=10
         max_overflow=20
-        timeout=30
+        timeout=3600
         
     class PythonJose:
         secret = getenv("JWT_SECRET")
@@ -29,7 +30,5 @@ class Config:
         version = "1.0.0"
         secret = getenv("FASTAPI_SECRET")
 
-load_dotenv(Config.env_file)
-
-if not Config.env_file:
-    raise InvalidEnvironmentFile(f"Environment file '{Config.env_file}' is missing or invalid.")
+if not dotenv_loaded:
+    raise InvalidEnvironmentFile(f"Environment file is missing or invalid.")

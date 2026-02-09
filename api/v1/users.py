@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from services.users_service import UsersService
 
 router = APIRouter(
@@ -7,5 +7,5 @@ router = APIRouter(
 )
 
 @router.get("/")
-def get_users():
-    return {"users": ["user1", "user2", "user3"]}
+async def get_users(service: UsersService = Depends()):
+    return await service.test()
