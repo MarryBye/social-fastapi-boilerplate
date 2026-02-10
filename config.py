@@ -18,6 +18,7 @@ class Config:
         pool_size=10
         max_overflow=20
         timeout=3600
+        reflected_schemas = ["private", "public", "crypto"]
         
     class PythonJose:
         secret = getenv("JWT_SECRET")

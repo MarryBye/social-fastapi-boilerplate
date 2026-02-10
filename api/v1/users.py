@@ -8,4 +8,4 @@ router = APIRouter(
 
 @router.get("/")
 async def get_users(service: UsersService = Depends()):
-    return await service.test()
+    return await service.all()
