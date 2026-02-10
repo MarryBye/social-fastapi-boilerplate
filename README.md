@@ -1,95 +1,97 @@
 # FastAPI Backend Boilerplate
 
-## 📌 Про проект
+[English](./README.md) - [Russian](./translations/README.ru-RU.md) - [Ukrainian](./translations/README.ua-UA.md)
 
-**FastAPI Backend Boilerplate** — это базовый шаблон backend-приложения, построенного на FastAPI, предназначенный для быстрого старта разработки API-сервисов с чистой архитектурой и полной управляемостью базы данных.
+## 📌 About the Project
 
-Проект может помочь:
+**FastAPI Backend Boilerplate** is a base template for a backend application built with FastAPI, designed to quickly bootstrap API service development with clean architecture and full database control.
 
-- Быстро запустить production-готовый backend
-- Построить API с четким разделением ответственности
-- Работать с PostgreSQL через SQLAlchemy Core без ORM
-- Использовать уже существующую базу данных (таблицы, функции, представления)
-- Создавать масштабируемые backend-системы с прозрачной бизнес-логикой
-- Централизовать конфигурацию и безопасность (JWT, секреты, ENV)
+The project helps you:
 
----
-
-## 🧰 Стек технологий
-
-Проект использует современный асинхронный стек:
-
-- **FastAPI** — веб-фреймворк для построения API
-- **Uvicorn** — ASGI сервер
-- **Pydantic** — валидация данных и DTO
-- **SQLAlchemy Core (async)** — доступ к БД без ORM
-- **asyncpg** — асинхронный драйвер PostgreSQL
-- **PostgreSQL** — основная база данных
-- **python-jose** — JWT аутентификация
-- **python-dotenv** — управление переменными окружения
+- Quickly launch a production-ready backend
+- Build APIs with clear separation of concerns
+- Work with PostgreSQL using SQLAlchemy Core without ORM
+- Use an existing database (tables, functions, views)
+- Build scalable backend systems with transparent business logic
+- Centralize configuration and security (JWT, secrets, ENV)
 
 ---
 
-## 🏗 Архитектура
+## 🧰 Tech Stack
 
-Проект построен на **слоевой архитектуре (Layered Architecture)**:
+The project uses a modern asynchronous stack:
+
+- **FastAPI** — web framework for building APIs  
+- **Uvicorn** — ASGI server  
+- **Pydantic** — data validation and DTOs  
+- **SQLAlchemy Core (async)** — database access without ORM  
+- **asyncpg** — asynchronous PostgreSQL driver  
+- **PostgreSQL** — primary database  
+- **python-jose** — JWT authentication  
+- **python-dotenv** — environment variable management  
+
+---
+
+## 🏗 Architecture
+
+The project follows a **Layered Architecture**:
 
 ### 1. API Layer (Presentation)
 
-- FastAPI Routers
-- Controllers
-- Валидация входных данных через Pydantic
-- Формирование HTTP ответов
-- Аутентификация и авторизация
+- FastAPI Routers  
+- Controllers  
+- Input validation using Pydantic  
+- HTTP response formatting  
+- Authentication and authorization  
 
 ### 2. Service Layer (Business Logic)
 
-- Основная бизнес-логика
-- Оркестрация операций
-- Работа с транзакциями
-- Вызов репозиториев
-- Обработка ошибок домена
+- Core business logic  
+- Operation orchestration  
+- Transaction management  
+- Repository interaction  
+- Domain error handling  
 
 ### 3. Repository Layer (Data Access)
 
-- Чистый доступ к базе данных
-- Используется **SQLAlchemy Core (без ORM)**
-- Максимальный контроль SQL
-- Работа с функциями БД, view и raw SQL
-- Асинхронные запросы
+- Pure database access  
+- Uses **SQLAlchemy Core (without ORM)**  
+- Maximum SQL control  
+- Works with database functions, views, and raw SQL  
+- Asynchronous queries  
 
 ---
 
-### 📦 Работа с базой данных
+## 📦 Database Approach
 
-Важный архитектурный принцип:
+Key architectural principles:
 
-- Таблицы **создаются отдельно в самой БД**
-- Миграции выполняются вне backend
-- Бизнес-логика может быть частично реализована в функциях PostgreSQL
-- Backend **не управляет схемой БД**
-- SQLAlchemy используется **только для reflect существующей структуры**
-- ORM не используется намеренно для полного контроля SQL
+- Tables are **created directly in the database**
+- Migrations are executed outside the backend
+- Business logic may partially reside in PostgreSQL functions
+- Backend **does not manage the database schema**
+- SQLAlchemy is used **only to reflect the existing structure**
+- ORM is intentionally avoided for full SQL control
 
-Это делает backend:
+This makes the backend:
 
-- Детерминированным
-- Предсказуемым
-- Подходящим для enterprise / DB-driven архитектур
-- Независимым от миграционных инструментов
+- Deterministic  
+- Predictable  
+- Suitable for enterprise / DB-driven architectures  
+- Independent from migration tools  
 
 ---
 
-## ⚙️ Установка
+## ⚙️ Installation
 
-### 1. Клонируйте репозиторий
+### 1. Clone the repository
 
 ```bash
 git clone <repo_url>
 cd project
 ```
 
-### 2. Создайте виртуальную среду
+### 2. Create a virtual environment
 
 ```bash
 python -m venv .venv
@@ -97,15 +99,15 @@ source .venv/bin/activate      # Linux / Mac
 .venv\Scripts\activate         # Windows
 ```
 
-### 3. Установите зависимости
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Настройке переменные виртуальной среды
+### 4. Configure environment variables
 
-Создайте файл с переменными виртуальной среды используя пример ```.env.example```
+Create an environment file using `.env.example` as a template.
 
 ```dotenv
 # FastAPI Configuration
@@ -124,27 +126,39 @@ DB_PASSWORD="your_password"
 DB_NAME="your_db_name"
 ```
 
-### 🔧 Configuration (config.py)
+---
 
-Конфигурация централизована и загружается из ```.env.dev```.
+## 🔧 Configuration (config.py)
 
-Основные параметры:
-- Database — подключение к PostgreSQL
-- SQLAlchemy — пул соединений и схемы для reflect
-- PythonJose — настройки JWT
-- FastAPI — метаданные API
-- dotenv — загрузка ENV
+Configuration is centralized and loaded from `.env.dev`.
 
-### ▶️ Запуск приложения
+Main settings include:
 
-Запуск выполняется при помощи uvicorn:
+- **Database** — PostgreSQL connection  
+- **SQLAlchemy** — connection pool and reflection schemas  
+- **PythonJose** — JWT configuration  
+- **FastAPI** — API metadata  
+- **dotenv** — environment loading  
+
+---
+
+## ▶️ Running the Application
+
+Run the server using Uvicorn:
+
 ```bash
 uvicorn main:app --reload
 ```
 
-Сервер будет доступен по адресу http://127.0.0.1:8000
+The server will be available at:
 
-### 📘 OpenAPI Documentation
+```
+http://127.0.0.1:8000
+```
 
-Swagger UI → http://127.0.0.1:8000/docs  
-ReDoc → http://127.0.0.1:8000/redoc  
+---
+
+## 📘 OpenAPI Documentation
+
+- Swagger UI → http://127.0.0.1:8000/docs  
+- ReDoc → http://127.0.0.1:8000/redoc  
